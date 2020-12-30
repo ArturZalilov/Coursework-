@@ -1,0 +1,234 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Хранилище RepairServicesModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="principal_id" Type="int" Nullable="false" />
+    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="version" Type="int" />
+    <Property Name="definition" Type="varbinary(max)" />
+  </EntityType>
+  <EntityType Name="Заказы">
+    <Key>
+      <PropertyRef Name="Номер_заказа" />
+    </Key>
+    <Property Name="Номер_заказа" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Код_клиента" Type="int" Nullable="false" />
+    <Property Name="Дата_заказа" Type="datetime" Nullable="false" />
+    <Property Name="Статус" Type="bit" Nullable="false" />
+    <Property Name="Описание" Type="nvarchar(max)" />
+    <Property Name="Дата_завершения" Type="datetime" />
+  </EntityType>
+  <EntityType Name="Использованные_материалы">
+    <Key>
+      <PropertyRef Name="N_пп" />
+    </Key>
+    <Property Name="N_пп" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Код_м" Type="int" Nullable="false" />
+    <Property Name="Номер_заказа" Type="int" Nullable="false" />
+    <Property Name="Количество" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Клиенты">
+    <Key>
+      <PropertyRef Name="Код_клиента" />
+    </Key>
+    <Property Name="Код_клиента" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Фамилия" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Имя" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Отчество" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Телефон" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="Адрес" Type="nvarchar" MaxLength="200" Nullable="false" />
+    <Property Name="Email" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Материалы">
+    <Key>
+      <PropertyRef Name="Код_материала" />
+    </Key>
+    <Property Name="Код_материала" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Цена" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="Наименование" Type="nvarchar" MaxLength="200" Nullable="false" />
+    <Property Name="Количество_в_остатке" Type="int" />
+    <Property Name="примечание" Type="nvarchar(max)" />
+  </EntityType>
+  <EntityType Name="Оказанные_услуги">
+    <Key>
+      <PropertyRef Name="N_пп" />
+    </Key>
+    <Property Name="N_пп" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Код_услуги" Type="int" Nullable="false" />
+    <Property Name="Номер_заказа" Type="int" Nullable="false" />
+    <Property Name="Номер_сотрудника" Type="int" Nullable="false" />
+    <Property Name="Количество" Type="int" Nullable="false" />
+    <Property Name="Примечание" Type="nvarchar(max)" />
+  </EntityType>
+  <EntityType Name="Сотрудники">
+    <Key>
+      <PropertyRef Name="Номер_сотрудника" />
+    </Key>
+    <Property Name="Номер_сотрудника" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Фамилия" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Имя" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Отчество" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Адрес" Type="nvarchar" MaxLength="200" Nullable="false" />
+    <Property Name="Дата_рождения" Type="datetime" Nullable="false" />
+    <Property Name="Телефон" Type="nvarchar" MaxLength="20" />
+  </EntityType>
+  <EntityType Name="Услуги">
+    <Key>
+      <PropertyRef Name="Код_услуги" />
+    </Key>
+    <Property Name="Код_услуги" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Наименование" Type="nvarchar" MaxLength="200" Nullable="false" />
+    <Property Name="Единица_измерения" Type="nvarchar" MaxLength="50" />
+    <Property Name="Цена_за_единицу_руб" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+  </EntityType>
+  <!--Ошибки, обнаруженные при создании:
+предупреждение 6002: В таблице или представлении "RepairServices.dbo.Сумма_заказов_месяц" не определен первичный ключ. Ключ был выведен, а определение таблицы или представления было создано в режиме только для чтения.-->
+  <EntityType Name="Сумма_заказов_месяц">
+    <Key>
+      <PropertyRef Name="Код_клиента" />
+      <PropertyRef Name="Фамилия" />
+      <PropertyRef Name="Имя" />
+      <PropertyRef Name="Отчество" />
+      <PropertyRef Name="Телефон" />
+    </Key>
+    <Property Name="Код_клиента" Type="int" Nullable="false" />
+    <Property Name="месяц" Type="int" />
+    <Property Name="Фамилия" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Имя" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Отчество" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Телефон" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="Сумма" Type="decimal" Precision="38" Scale="2" />
+  </EntityType>
+  <Association Name="FK__Заказы__Код_клие__267ABA7A">
+    <End Role="Клиенты" Type="Self.Клиенты" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Заказы" Type="Self.Заказы" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Клиенты">
+        <PropertyRef Name="Код_клиента" />
+      </Principal>
+      <Dependent Role="Заказы">
+        <PropertyRef Name="Код_клиента" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Использов__Код_м__33D4B598">
+    <End Role="Материалы" Type="Self.Материалы" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Использованные_материалы" Type="Self.Использованные_материалы" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Материалы">
+        <PropertyRef Name="Код_материала" />
+      </Principal>
+      <Dependent Role="Использованные_материалы">
+        <PropertyRef Name="Код_м" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Использов__Номер__34C8D9D1">
+    <End Role="Заказы" Type="Self.Заказы" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Использованные_материалы" Type="Self.Использованные_материалы" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Заказы">
+        <PropertyRef Name="Номер_заказа" />
+      </Principal>
+      <Dependent Role="Использованные_материалы">
+        <PropertyRef Name="Номер_заказа" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Оказанные__Код_у__2D27B809">
+    <End Role="Услуги" Type="Self.Услуги" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Оказанные_услуги" Type="Self.Оказанные_услуги" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Услуги">
+        <PropertyRef Name="Код_услуги" />
+      </Principal>
+      <Dependent Role="Оказанные_услуги">
+        <PropertyRef Name="Код_услуги" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Оказанные__Номер__2E1BDC42">
+    <End Role="Заказы" Type="Self.Заказы" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Оказанные_услуги" Type="Self.Оказанные_услуги" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Заказы">
+        <PropertyRef Name="Номер_заказа" />
+      </Principal>
+      <Dependent Role="Оказанные_услуги">
+        <PropertyRef Name="Номер_заказа" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Оказанные__Номер__2F10007B">
+    <End Role="Сотрудники" Type="Self.Сотрудники" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Оказанные_услуги" Type="Self.Оказанные_услуги" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Сотрудники">
+        <PropertyRef Name="Номер_сотрудника" />
+      </Principal>
+      <Dependent Role="Оказанные_услуги">
+        <PropertyRef Name="Номер_сотрудника" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="Хранилище RepairServicesModelContainer">
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Заказы" EntityType="Self.Заказы" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Использованные_материалы" EntityType="Self.Использованные_материалы" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Клиенты" EntityType="Self.Клиенты" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Материалы" EntityType="Self.Материалы" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Оказанные_услуги" EntityType="Self.Оказанные_услуги" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Сотрудники" EntityType="Self.Сотрудники" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Услуги" EntityType="Self.Услуги" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Сумма_заказов_месяц" EntityType="Self.Сумма_заказов_месяц" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [Сумма_заказов_месяц].[Код_клиента] AS [Код_клиента], 
+    [Сумма_заказов_месяц].[месяц] AS [месяц], 
+    [Сумма_заказов_месяц].[Фамилия] AS [Фамилия], 
+    [Сумма_заказов_месяц].[Имя] AS [Имя], 
+    [Сумма_заказов_месяц].[Отчество] AS [Отчество], 
+    [Сумма_заказов_месяц].[Телефон] AS [Телефон], 
+    [Сумма_заказов_месяц].[Сумма] AS [Сумма]
+    FROM [dbo].[Сумма_заказов_месяц] AS [Сумма_заказов_месяц]</DefiningQuery>
+    </EntitySet>
+    <AssociationSet Name="FK__Заказы__Код_клие__267ABA7A" Association="Self.FK__Заказы__Код_клие__267ABA7A">
+      <End Role="Клиенты" EntitySet="Клиенты" />
+      <End Role="Заказы" EntitySet="Заказы" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Использов__Код_м__33D4B598" Association="Self.FK__Использов__Код_м__33D4B598">
+      <End Role="Материалы" EntitySet="Материалы" />
+      <End Role="Использованные_материалы" EntitySet="Использованные_материалы" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Использов__Номер__34C8D9D1" Association="Self.FK__Использов__Номер__34C8D9D1">
+      <End Role="Заказы" EntitySet="Заказы" />
+      <End Role="Использованные_материалы" EntitySet="Использованные_материалы" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Оказанные__Код_у__2D27B809" Association="Self.FK__Оказанные__Код_у__2D27B809">
+      <End Role="Услуги" EntitySet="Услуги" />
+      <End Role="Оказанные_услуги" EntitySet="Оказанные_услуги" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Оказанные__Номер__2E1BDC42" Association="Self.FK__Оказанные__Номер__2E1BDC42">
+      <End Role="Заказы" EntitySet="Заказы" />
+      <End Role="Оказанные_услуги" EntitySet="Оказанные_услуги" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Оказанные__Номер__2F10007B" Association="Self.FK__Оказанные__Номер__2F10007B">
+      <End Role="Сотрудники" EntitySet="Сотрудники" />
+      <End Role="Оказанные_услуги" EntitySet="Оказанные_услуги" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

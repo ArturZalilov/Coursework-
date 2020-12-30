@@ -1,0 +1,134 @@
+﻿<Page x:Class="RepairServices.Pages.OutputDataPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+      xmlns:local="clr-namespace:RepairServices.Pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="OutputDataPage" >
+
+    <Grid x:Name="mainGrid">
+        <StackPanel Orientation="Horizontal" VerticalAlignment="Top" Margin="263,8,90,0" Width="900">
+            <StackPanel Orientation="Horizontal" VerticalAlignment="Top">
+                <TextBlock Text="Выберите таблицу для экспорта в Excel: " FontFamily="Verdana" VerticalAlignment="Center"/>
+                <ComboBox x:Name="cbTable" FontFamily="Verdana" Width="140" VerticalAlignment="Center">
+                    <TextBlock Text="Клиенты"/>
+                    <TextBlock Text="Заказы"/>
+                    <TextBlock Text="Оказанные услуги"/>
+                    <TextBlock Text="Отчет"/>
+                </ComboBox>
+            </StackPanel>
+            <Button Panel.ZIndex="2" x:Name="btExcel" VerticalAlignment="Top" HorizontalAlignment="Right" Background="Transparent" BorderThickness="0" Height="50" Width="90" Click="Export_Click" Margin="0,0,30,0">
+                <materialDesign:PackIcon Kind="MicrosoftExcel" Width="48" Height="45" Foreground="ForestGreen"/>
+            </Button>
+        </StackPanel>
+
+        <TabControl Margin="0 40 0 0">
+            <TabItem>
+                <TabItem.Header>
+                    <TextBlock Text="Клиенты"/>
+                </TabItem.Header>
+                <TabItem.Content>
+                    <DataGrid x:Name="dgClients" AutoGenerateColumns="False" IsReadOnly="True">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Код клиента" Binding="{Binding Path=Код_клиента}"/>
+                            <DataGridTextColumn Header="Фамилия" Binding="{Binding Path=Фамилия}"/>
+                            <DataGridTextColumn Header="Имя" Binding="{Binding Path=Имя}"/>
+                            <DataGridTextColumn Header="Отчество" Binding="{Binding Path=Отчество}"/>
+                            <DataGridTextColumn Header="Телефон" Binding="{Binding Path=Телефон}"/>
+                            <DataGridTextColumn Header="Адрес" Binding="{Binding Path=Адрес}"/>
+                            <DataGridTextColumn Header="Email" Binding="{Binding Path=Email}"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </TabItem.Content>
+            </TabItem>
+            <TabItem>
+                <TabItem.Header>
+                    <TextBlock Text="Услуги"/>
+                </TabItem.Header>
+                <TabItem.Content>
+                    <DataGrid x:Name="dgServices" IsReadOnly="True" AutoGenerateColumns="False">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Код услуги" Binding="{Binding Path=Код_услуги}"/>
+                            <DataGridTextColumn Header="Наименование" Binding="{Binding Path=Наименование}"/>
+                            <DataGridTextColumn Header="Единица измерения" Binding="{Binding Path=Единица_измерения}"/>
+                            <DataGridTextColumn Header="Цена за единицу руб." Binding="{Binding Path=Цена_за_единицу_руб}"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </TabItem.Content>
+            </TabItem>
+            <TabItem>
+                <TabItem.Header>
+                    <TextBlock Text="Заказы"/>
+                </TabItem.Header>
+                <TabItem.Content>
+                    <DataGrid x:Name="dgOrders" IsReadOnly="True" AutoGenerateColumns="False">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Номер заказа" Binding="{Binding Path=Номер_заказа}"/>
+                            <DataGridTextColumn Header="Код клиента" Binding="{Binding Path=Код_клиента}"/>
+                            <DataGridTextColumn Header="Дата заказа" Binding="{Binding Path=Дата_заказа}"/>
+                            <DataGridTextColumn Header="Статус" Binding="{Binding Path=Статус}"/>
+                            <DataGridTextColumn Header="Описание" Binding="{Binding Path=Описание}"/>
+                            <DataGridTextColumn Header="Дата завершения" Binding="{Binding Path=Дата_завершения}"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </TabItem.Content>
+            </TabItem>
+            <TabItem>
+                <TabItem.Header>
+                    <TextBlock Text="Оказанные услуги"/>
+                </TabItem.Header>
+                <TabItem.Content>
+                    <DataGrid x:Name="dgServRend" IsReadOnly="True" AutoGenerateColumns="False">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="№ пп" Binding="{Binding Path=N_пп}"/>
+                            <DataGridTextColumn Header="Код услуги" Binding="{Binding Path=Код_услуги}"/>
+                            <DataGridTextColumn Header="Номер заказа" Binding="{Binding Path=Номер_заказа}"/>
+                            <DataGridTextColumn Header="Номер сотрудника" Binding="{Binding Path=Номер_сотрудника}"/>
+                            <DataGridTextColumn Header="Количество" Binding="{Binding Path=Количество}"/>
+                            <DataGridTextColumn Header="Примечание" Binding="{Binding Path=Примечание}"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </TabItem.Content>
+            </TabItem>
+            <TabItem>
+                <TabItem.Header>
+                    <TextBlock Text="Сотрудники"/>
+                </TabItem.Header>
+                <TabItem.Content>
+                    <DataGrid x:Name="dgStaff" IsReadOnly="True" AutoGenerateColumns="False">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Номер сотрудника" Binding="{Binding Path=Номер_сотрудника}"/>
+                            <DataGridTextColumn Header="Фамилия" Binding="{Binding Path=Фамилия}"/>
+                            <DataGridTextColumn Header="Имя" Binding="{Binding Path=Имя}"/>
+                            <DataGridTextColumn Header="Отчество" Binding="{Binding Path=Отчество}"/>
+                            <DataGridTextColumn Header="Адрес" Binding="{Binding Path=Адрес}"/>
+                            <DataGridTextColumn Header="Дата рождения" Binding="{Binding Path=Дата_рождения}"/>
+                            <DataGridTextColumn Header="Телефон" Binding="{Binding Path=Телефон}"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </TabItem.Content>
+            </TabItem>
+            <TabItem>
+                <TabItem.Header>
+                    <TextBlock Text="Суммарная цена заказов клиентами за каждый месяц"/>
+                </TabItem.Header>
+                <TabItem.Content>
+                    <DataGrid x:Name="dgReport" IsReadOnly="True" AutoGenerateColumns="False">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Код клиента" Binding="{Binding Path=Код_клиента}"/>
+                            <DataGridTextColumn Header="Фамилия" Binding="{Binding Path=Фамилия}"/>
+                            <DataGridTextColumn Header="Имя" Binding="{Binding Path=Имя}"/>
+                            <DataGridTextColumn Header="Отчество" Binding="{Binding Path=Отчество}"/>
+                            <DataGridTextColumn Header="Телефон" Binding="{Binding Path=Телефон}"/>
+                            <DataGridTextColumn Header="Месяц" Binding="{Binding Path=месяц}"/>
+                            <DataGridTextColumn Header="Сумма" Binding="{Binding Path=Сумма}"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </TabItem.Content>
+            </TabItem>
+        </TabControl>
+    </Grid>
+</Page>

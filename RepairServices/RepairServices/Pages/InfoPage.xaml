@@ -1,0 +1,23 @@
+﻿<Page x:Class="RepairServices.Pages.InfoPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:RepairServices.Pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="570" d:DesignWidth="1115"
+      Title="InfoPage">
+
+    <Grid Background="#1e1e4e">
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="15">
+            <Image Source="/Resources/logo_short.png" Width="90"/>
+            <StackPanel Orientation="Vertical" Width="525">
+                <TextBlock Text="Название: RepairServices" FontFamily="Arial" Foreground="White" Margin="10 10 0 0" FontSize="18" FontWeight="Black"/>
+                <TextBlock Text="Контакты разработчика: 89925081898 - сот.тел., WhatsApp, Viber Залилов Артур Ильдарович, Discord: saitovarturbkru#9984" FontSize="17" Margin="10 10 0 0" TextWrapping="Wrap" FontFamily="Arial" Foreground="White" Height="56"/>
+            </StackPanel>
+        </StackPanel>
+        <Line X1="0" Y1="135" X2="600" Y2="135" Stroke="Aquamarine" HorizontalAlignment="Center"/>
+        <TextBlock Foreground="White" FontFamily="Arial" FontSize="18" TextWrapping="Wrap" VerticalAlignment="Center" Height="78" Margin="250,204,215,288">Программа предназначена для учета заказов ремонтных услуг, ведения данных о новых клиентах, редактирования записей базы данных и экспорта данных в Excel.</TextBlock>
+        <TextBlock Foreground="White" FontFamily="Arial" FontSize="18" TextWrapping="Wrap" Height="90" Margin="250,287,215,193">Для корректной работы данного приложения необходимо наличие на локальном компьютере базы данных ремонтных услуг, иначе программа не будет способна работать с данными для которых она предназначена.</TextBlock>
+    </Grid>
+</Page>
